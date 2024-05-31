@@ -9,7 +9,7 @@ public class Hello{
     }
 }
 
-
+ // if Method is statc than don't need to create instance variable.
  // anonymous Window code.   
 
  Hello obj = new Hello();
