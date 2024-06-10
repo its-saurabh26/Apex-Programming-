@@ -16,6 +16,6 @@ public class Soql {
 
  // if Method is statc than don't need to create instance variable.
  // anonymous Window code.
-    
+ b   
 Soql.Main();
  
