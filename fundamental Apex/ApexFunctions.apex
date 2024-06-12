@@ -48,3 +48,41 @@ public class ApexFunctions {
     return (Math.mod(year, 400) == 0) || (Math.mod(year, 4) == 0 && Math.mod(year, 100) != 0);     
         
     }
+
+   
+// write an apex function which accept a string and return the reverse order of the string    
+    public static String reveseString(string inputString){
+        String outputString = '';
+        
+        for (Integer i = inputString.length() - 1; i >= 0; i--) {
+            outputString += inputString.substring(i, i + 1);
+        }
+        return outputString;
+        
+    }
+    
+    
+    public static String reveseStringTwoPointer(string inputString){
+        List<String> charArray = new List<String>();
+        
+         // Convert the input string to a character array
+        for (Integer i = 0; i < inputString.length(); i++) {
+            charArray.add(inputString.substring(i, i + 1));
+        }
+        
+        Integer left = 0;
+        Integer right = charArray.size()-1;
+        
+        while(left<right){
+            String temp = charArray[left];
+            charArray[left] = charArray[right];
+            charArray[right] = temp;
+            left++;
+            right--;
+        }
+        String reverseString = '';
+        for(String charater:charArray){
+            reverseString += charater;
+        }
+        return reverseString;
+    }
