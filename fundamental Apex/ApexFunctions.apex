@@ -86,3 +86,19 @@ public class ApexFunctions {
         }
         return reverseString;
     }
+
+
+
+
+
+// write a apex function which will accept a list of string and return
+ // character concatenating all elements of list    
+    public static string concatenateStrings(List<string>inputList){
+        
+        String concatenatedString = '';
+        
+        for (String str : inputList) {
+            concatenatedString += str;
+        }
+        return concatenatedString;
+     }
