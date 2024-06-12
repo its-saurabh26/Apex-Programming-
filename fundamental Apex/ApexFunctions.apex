@@ -42,3 +42,9 @@ public class ApexFunctions {
     
 }
 
+   
+// Write an apex function which accepts a date and returns boolean based on leap year
+    public static boolean isLeapYear(Integer year){
+    return (Math.mod(year, 400) == 0) || (Math.mod(year, 4) == 0 && Math.mod(year, 100) != 0);     
+        
+    }
