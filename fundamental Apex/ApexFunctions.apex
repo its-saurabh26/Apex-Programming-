@@ -101,4 +101,84 @@ public class ApexFunctions {
             concatenatedString += str;
         }
         return concatenatedString;
-     }
+    }
+
+
+
+
+
+
+
+
+// if Method is statc than don't need to create instance variable.
+// anonymous Window code.
+
+List<Integer> numbers = new List<Integer>{6, 3, 1, 4, 2};
+List<Integer> sortedNumbers = ApexFunctions.sortList(numbers);
+//Log the output
+System.debug('Sorted Numbers: ' + sortedNumbers);
+
+
+
+
+
+List<Integer>numbers = new List<Integer>{1,2,3,4,5,6,7,8};
+Map<String,List<Integer>>result = ApexFunctions.EvenOdd(numbers);
+// Log the output
+System.debug('Even Numbers: ' + result.get('Even'));
+System.debug('Odd Numbers: ' + result.get('Odd'));
+
+
+
+
+
+
+Integer year1 = 2020;
+Integer year2 = 2021;
+Integer year3 = 1900;
+Integer year4 = 2020;
+Integer year5 = 2024;
+
+Boolean result1 = ApexFunctions.isLeapYear(year1);
+Boolean result2 = ApexFunctions.isLeapYear(year2);
+Boolean result3 = ApexFunctions.isLeapYear(year3);
+Boolean result4 = ApexFunctions.isLeapYear(year4);
+Boolean result5 = ApexFunctions.isLeapYear(year5);
+
+// Log the output
+System.debug('Year ' + year1 + ' is a leap year: ' + result1);
+System.debug('Year ' + year2 + ' is a leap year: ' + result2);
+System.debug('Year ' + year3 + ' is a leap year: ' + result3);
+System.debug('Year ' + year4 + ' is a leap year: ' + result4);
+System.debug('Year ' + year5 + ' is a leap year: ' + result5);
+
+
+
+
+
+
+
+
+// Sample string to test
+String testString = 'hello world';
+String reversedString = ApexFunctions.reveseString(testString);
+
+//Log the Result
+System.debug('Original String: ' + testString);
+System.debug('Reversed String: ' + reversedString);
+
+//Two pointer apporach 
+String testString = 'hello world';
+String reversedString = ApexFunctions.reveseStringTwoPointer(testString);
+//Log the Result
+System.debug('Original String: ' + testString);
+System.debug('Reversed String: ' + reversedString);
+
+
+
+List<String> stringList = new List<String>{'hello', ' ', 'world', '!', ' Welcome', ' to', ' Apex'};
+String concatenatedString  =  ApexFunctions.concatenateStrings(stringList);
+// Log the ans
+System.debug('Concatenated String: ' + concatenatedString);
+
+
