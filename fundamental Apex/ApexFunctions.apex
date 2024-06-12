@@ -107,6 +107,24 @@ public class ApexFunctions {
 
 
 
+//write an apex function which will accept a integer and return a string of random unique character
+    
+    public static String generateRandomString(Integer inputIntege){
+        String Allcharacter ='abcdefghijklmnopqrstuvwxyz';
+        String randomString = '';    
+       
+    
+        for(Integer i =0; i<inputIntege; i++){
+            Integer randomIndex = (Integer)Math.floor(Math.random() * Allcharacter.length());
+            randomString += Allcharacter.substring(randomIndex, randomIndex + 1);
+        }
+        return randomString;
+    }
+
+
+
+
+
 
 
 
@@ -182,3 +200,8 @@ String concatenatedString  =  ApexFunctions.concatenateStrings(stringList);
 System.debug('Concatenated String: ' + concatenatedString);
 
 
+
+
+String randomString = ApexFunctions.generateRandomString(5);
+// Log the ans
+System.debug('Random String: ' + randomString);
