@@ -94,8 +94,68 @@
 
 
 // Trigger
-trigger OpportuntiyTrigger on Opportunity (after insert, after update, after delete, after undelete) {
-    
+trigger OpportuntiyTrigger on Opportunity (after insert, after update, after delete, after undelete) { 
     OpportunityCountvViaAccount.updateAccountOpportunityCounts(Trigger.new,Trigger.old);
        
+}
+
+
+Q2 Make Product filed in Opportunity and  if user add new product form opportunitie product then this product 
+// should be autopopulate to the that field which we created on the Opportunity object 
+// every time when new product is add then comma should be added automatically 
+
+public class OpportunityProductHelper {
+    public static void updateProductNames(List<OpportunityLineItem>newItems,Map<Id,OpportunityLineItem>oldLineItemsMap){
+        
+        set<Id>opportunityIds = new Set<Id>();
+        
+        for(OpportunityLineItem oppList:newItems){
+            opportunityIds.add(oppList.OpportunityId);
+        }
+        
+        // Add Opportunity IDs from old line items if trigger event is update or delete
+        if(oldLineItemsMap != NULL){ 
+            for(OpportunityLineItem opplist: oldLineItemsMap.values()){
+                opportunityIds.add(opplist.OpportunityId);
+            }
+        }
+        
+        // Map to store Opportunity IDs and their corresponding Product Names        
+        Map<Id,String>opportunityProductNames = new Map<Id,String>();
+        
+        // Query to get existing OpportunityLineItems
+        List<OpportunityLineItem>relatedLineItems=[
+            select OpportunityId,Product2.Name from OpportunityLineItem where OpportunityId IN :opportunityIds];
+        
+        for(OpportunityLineItem opplist: relatedLineItems){
+            
+            // Append product name to existing product names
+            if(opportunityProductNames.containsKey(opplist.OpportunityId)){
+                opportunityProductNames.put(opplist.OpportunityId,opportunityProductNames.get(opplist.OpportunityId) + ','+ opplist.Product2.Name);  
+            } 
+            else{
+                // Initialize the product names string
+                opportunityProductNames.put(opplist.OpportunityId,opplist.Product2.Name);
+            }
+        }
+        
+        // List to store Opportunities to be updated
+        List<Opportunity>opportunitiesToUpdate = new List<Opportunity>();
+        
+        for(ID oppID:opportunityProductNames.keySet()){
+            Opportunity opp = new Opportunity(Id = oppID,Product_Name__c = opportunityProductNames.get(oppId));   
+            opportunitiesToUpdate.add(opp);
+        }
+        // update opportunity 
+        if(!opportunitiesToUpdate.isEmpty()){
+            update opportunitiesToUpdate;
+        }
+        
+    } 
+}
+
+
+trigger OpportunityProductTrigger on OpportunityLineItem (before insert,after insert, after update, after delete) {
+    
+ OpportunityProductHelper.updateProductNames(Trigger.new, Trigger.oldMap);
 }
